@@ -1,0 +1,21 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: tomcat-deploy
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        env: dev
+        owner: nicolas
+    spec:
+      containers:
+      - name: sise
+        image: tomcat:8.0.52-jre8
+        ports:
+        - containerPort: 8080
+        env:
+        - name: TOMCAT_VERSION
+          value: "8.0.52
+

@@ -1,0 +1,25 @@
+---
+
+- name: Prepare all VMs
+  hosts: all
+  remote_user: centos
+  gather_facts: true
+  become: yes
+  tags: prerequisites
+  roles:
+    - all_prerequisites
+
+- name: Prepare masters
+  hosts: master
+  remote_user: centos
+  gather_facts: false
+  roles:
+    - master_prerequisites
+
+- name: Install kubernetes
+  hosts: master
+  remote_user: centos
+  gather_facts: false
+  tags: kubespray
+  roles:
+    - install_k8s

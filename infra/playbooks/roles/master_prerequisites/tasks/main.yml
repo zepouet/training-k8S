@@ -1,0 +1,23 @@
+---
+
+- name: Get kubspray project
+  git:
+    repo: https://github.com/kubernetes-incubator/kubespray.git
+    dest: ./kubespray
+    force: yes
+    version: "{{ kubespray_version }}"
+
+
+- name: Get Treeptik resources
+  git:
+    repo: https://github.com/Treeptik/training-k8s-resources.git
+    dest: ./Treeptik-resources
+    force: yes
+
+- name: Export SSH private key
+  copy:
+    src: "{{ ansible_ssh_private_key_file }}"
+    dest: "{{ user_home }}/.ssh/id_rsa"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: 0600

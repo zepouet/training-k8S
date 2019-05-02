@@ -1,0 +1,70 @@
+---
+
+- name: Install Kubespray requirements
+  pip:
+    requirements: "{{ user_home }}/kubespray/requirements.txt"
+  become: yes
+
+- name: Duplicate sample inventory directory
+  command: "cp -rfp {{ user_home }}/kubespray/inventory/sample {{ user_home }}/kubespray/inventory/mycluster"
+
+- name: Show user_group name in trainer inventory
+  debug:
+    msg: "{{ group_names[1] }}"
+    verbosity: 2
+
+- set_fact:
+    user_kubespray_inventory: "{{ DIR_KUBESPRAY_INVENTORIES }}/kubespray_inventory_{{ group_names[1] }}"
+
+- name: Local user kubespray inventory file
+  debug:
+    msg: "{{ user_kubespray_inventory }}"
+    verbosity: 2
+
+- name: Remote user kubespray inventory file
+  debug:
+    msg: "{{ FILE_REMOTE_KUBESPRAY_INVENTORY }}"
+    verbosity: 2
+
+- name: Copy user kubespray inventory
+  copy:
+    src: "{{ user_kubespray_inventory }}"
+    dest: "{{ FILE_REMOTE_KUBESPRAY_INVENTORY }}"
+
+- name: Setup remote kubespray ansible.cfg file
+  lineinfile:
+    create: yes
+    state: present
+    line: "{{ item }}"
+    path: "{{ REMOTE_KUBESPRAY_ANSIBLE_CONFIG_FILE }}"
+  with_items:
+    - "remote_user={{ user }}"
+    - "private_key_file={{ DIR_REMOTE_USER_SSH_PRIVATE_KEY }}"
+
+- name: Copy Kubespray cluster config to remote
+  block:
+    - copy:
+        src: "{{ DIR_KUBESPRAY_CONFIG }}/config_kubespray_all.yml"
+        dest: "{{ DIR_REMOTE_KUBESPRAY_CLUSTER_CONFIG }}/all.yml"
+    - copy:
+        src: "{{ DIR_KUBESPRAY_CONFIG }}/config_kubespray_k8s-cluster.yml"
+        dest: "{{ DIR_REMOTE_KUBESPRAY_CLUSTER_CONFIG }}/k8s-cluster.yml"
+
+- name: Update default port range
+  lineinfile:
+    dest: "{{ DIR_REMOTE_KUBESPRAY }}/roles/kubernetes/master/defaults/main.yml"
+    regexp: 'kube_apiserver_node_port_range: "30000-32767"'
+    line: 'kube_apiserver_node_port_range: "30000-32000"'
+    backup: yes
+
+- name: Enable audit support
+  lineinfile:
+    dest: "{{ DIR_REMOTE_KUBESPRAY }}/roles/kubernetes/master/defaults/main.yml"
+    regexp: 'kubernetes_audit: false'
+    line: 'kubernetes_audit: true'
+    backup: yes
+
+- name: Execute Kubespray playbook installation via Ansible
+  shell: ansible-playbook -i {{ FILE_REMOTE_KUBESPRAY_INVENTORY }} --become cluster.yml
+  args:
+    chdir: "{{ DIR_REMOTE_KUBESPRAY }}"

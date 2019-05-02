@@ -1,0 +1,52 @@
+vinci-form-k8s-user0-master-1 ansible_host=68.183.34.71
+vinci-form-k8s-user0-node-1 ansible_host=68.183.42.77
+vinci-form-k8s-user0-node-2 ansible_host=68.183.42.83
+vinci-form-k8s-user1-master-1 ansible_host=68.183.36.251
+vinci-form-k8s-user1-node-1 ansible_host=167.99.86.241
+vinci-form-k8s-user1-node-2 ansible_host=167.99.192.226
+vinci-form-k8s-user2-master-1 ansible_host=68.183.42.103
+vinci-form-k8s-user2-node-1 ansible_host=68.183.42.124
+vinci-form-k8s-user2-node-2 ansible_host=68.183.42.127
+vinci-form-k8s-user3-master-1 ansible_host=68.183.42.128
+vinci-form-k8s-user3-node-1 ansible_host=68.183.42.139
+vinci-form-k8s-user3-node-2 ansible_host=68.183.42.149
+
+[user0]
+vinci-form-k8s-user0-master-1
+vinci-form-k8s-user0-node-1
+vinci-form-k8s-user0-node-2
+
+[user1]
+vinci-form-k8s-user1-master-1
+vinci-form-k8s-user1-node-1
+vinci-form-k8s-user1-node-2
+
+[user2]
+vinci-form-k8s-user2-master-1
+vinci-form-k8s-user2-node-1
+vinci-form-k8s-user2-node-2
+
+[user3]
+vinci-form-k8s-user3-master-1
+vinci-form-k8s-user3-node-1
+vinci-form-k8s-user3-node-2
+
+[master]
+vinci-form-k8s-user0-master-1
+vinci-form-k8s-user1-master-1
+vinci-form-k8s-user2-master-1
+vinci-form-k8s-user3-master-1
+
+[node]
+vinci-form-k8s-user0-node-1
+vinci-form-k8s-user0-node-2
+vinci-form-k8s-user1-node-1
+vinci-form-k8s-user1-node-2
+vinci-form-k8s-user2-node-1
+vinci-form-k8s-user2-node-2
+vinci-form-k8s-user3-node-1
+vinci-form-k8s-user3-node-2
+
+[all:vars]
+ansible_ssh_private_key_file=/Users/nicolas/Documents/training-k8s-provisioning/playbooks/roles/master_prerequisites/file/id_rsa_formation_tp
+

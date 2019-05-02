@@ -1,0 +1,6 @@
+env.sh
+.DS_Store
+ansible.cfg
+playbooks/hosts
+summary.txt
+playbooks/roles/install_k8s/files/kubespray_*

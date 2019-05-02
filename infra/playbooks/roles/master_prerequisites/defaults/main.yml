@@ -1,0 +1,4 @@
+---
+user: centos
+user_home: "/home/{{ user }}"
+kubespray_version: "v2.8.0"
