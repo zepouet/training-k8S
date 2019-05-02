@@ -56,7 +56,7 @@ https://kubernetes.io/docs/concepts/storage/volumes/#types-of-volumes
 --------
 
 
-### EXERCICE VOLUME_INTRA_PODS
+### EXERCICE VOLUME INTRA PODS
 
 
 --------
@@ -246,15 +246,11 @@ diagnostic.data                      journal                         sizeStorer.
 
 
 
-### EXERCICE VOLUMECLAIMWITHMONGO
+### EXERCICE VOLUMECLAIM WITH MONGO
 
 
 --------
 
 
 
-### EXERCICE VolumeClaimSharing
-
-
-
-
+### EXERCICE VolumeClaim Sharing
