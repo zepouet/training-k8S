@@ -50,9 +50,9 @@
 - [ ] Limitations de ressources
   - [ ] Concepts
   - [ ] Exemple CPU / Mémoire
-- [ ] Autoscaling
+- [ ] Autoscaling
   - [ ] Concepts
   - [ ] Exemple : File de messages
-- [ ] NetworkPolicies
+- [ ] Network Policies
   - [ ] Concepts
   - [ ] Exemple : Calico
