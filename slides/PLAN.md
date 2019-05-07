@@ -37,7 +37,7 @@
   - [x] ConfigMap
   - [x] Secrets
   - [ ] Vault
-- [ ] Objets complémentaires
+- [ ] Complements
   - [ ] DaemonSets
     - Principe
     - Gestion des logs
