@@ -4,18 +4,17 @@
 --------
 
 
-### Questions
-
-- __Pod__
-- __ReplicaSet__  
-- __Deployement__
-- __Service__
+- Rôles des Controllers
+- Scheduler et stratégie
+- Node Selector
+- Affinités
+- Taints
 
 
 --------
 
 
-#### Controller
+#### Rôle des Controllers
 
 Ils gèrent l'orchestration suivant les stratégies décidées pour maintenir et faire évoluer les fonctions applicatives
 - Stratégie de placement
@@ -25,7 +24,7 @@ Ils gèrent l'orchestration suivant les stratégies décidées pour maintenir et
 --------
 
 
-#### Scheduler et strategie
+#### Scheduler et stratégie
 
 
 - Kubernetes fournit un orchestrateur : __kube-scheduler__.
@@ -338,7 +337,7 @@ spec:
 
 
 
-### TAINTS & TolerationS
+### Taints & Tolerations
 
 
 --------

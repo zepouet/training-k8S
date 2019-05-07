@@ -1,12 +1,58 @@
 # JOUR 1
 
+- [x] Sommaire
+- [x] Contexte
+- [x] Présentation
 - [x] Architecture
-- [ ] Push my commits to GitHub
-- [ ] Open a pull request
+- [x] Principaux objets
+  - [x] Pods
+  - [x] ReplicaSet
+  - [x] Deployment
+  - [ ] Namespaces
+- [ ] Namespaces et Quotas
+- [x] Services
+  - [x] ClusterIP
+  - [x] NodePort
+  - [x] LoadBalancer
+    - [ ] TP Demo DO
+    - [ ] MetalLB
+  - [x] Service Discovery
+- [ ] Ingress
+- [x] Storage
+  - [x] Persistent Volume
+  - [x] StorageClass
+  - [ ] Operator
+- [x] Orchestration
+  - [x] ConfigMap
+  - [x] Secrets
+  - [ ] Vault
+- [ ] Administration
+  - [ ] Principe de haute disponibilité
+  - [ ] Mode maintenance
+  - [ ] Audits    
 
 # JOUR 2
 
 - [x] Configuration
-  - [x] Configuration
-  - [ ] Configuration
-- [ ] Push my commits to GitHub
+  - [x] ConfigMap
+  - [x] Secrets
+  - [ ] Vault
+- Objets complémentaires
+  - [ ] DaemonSets
+    - [ ] Principe
+    - [ ] Gestion des logs
+  - [ ] StatefulSets
+    - [ ] Principe
+    - [ ] TP : PostgreSQL
+  - [ ] Jobs
+    - [ ] Concepts
+    - [ ] TP : CronJob
+  - Limitations de ressources
+    - [ ] Concepts
+    - [ ] Exemple CPU / Mémoire
+  - Autoscaling
+    - [ ] Concepts
+    - [ ] Exemple : File de messages
+  - Network Policies
+  - [ ] Concepts
+  - [ ] Exemple : Calico
