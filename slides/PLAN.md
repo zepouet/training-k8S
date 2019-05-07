@@ -12,8 +12,8 @@
 - [ ] Namespaces et Quotas
 - [x] Services
   - [x] ClusterIP
-  - [x] NodePort
-  - [x] LoadBalancer
+  - [x] NodePort
+  - [x] Load Balancer
     - Principe Cloud Provider
     - MetalLB
   - [x] Service Discovery
