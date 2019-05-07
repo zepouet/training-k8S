@@ -53,6 +53,6 @@
 - [ ] Autoscaling
   - [ ] Concepts
   - [ ] Exemple : File de messages
-- [ ] Network Policies
+- [ ] NetworkPolicies
   - [ ] Concepts
   - [ ] Exemple : Calico
