@@ -37,7 +37,7 @@
   - [x] ConfigMap
   - [x] Secrets
   - [ ] Vault
-- [x] Configuration
+- [x] Objets complémentaires
   - [x] DaemonSets
     - Principe
     - Gestion des logs
@@ -47,7 +47,7 @@
   - [ ] Jobs
     - Concepts
     - TP : CronJob
-- [ ] Limitations de ressources
+- [ ] Limitations de ressources
   - [ ] Concepts
   - [ ] Exemple CPU / Mémoire
 - [ ] Autoscaling
