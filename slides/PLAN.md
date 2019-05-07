@@ -14,6 +14,7 @@
   - [x] ClusterIP
   - [x] NodePort
   - [x] Load Balancer
+    - [x] ClusterIP
     - Principe Cloud Provider
     - MetalLB
   - [x] Service Discovery
