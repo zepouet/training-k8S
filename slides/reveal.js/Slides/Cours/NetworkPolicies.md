@@ -15,13 +15,6 @@
 --------
 
 
-### EXERCICE NAMESPACES
-
-
-
---------
-
-
 
 ## Network Policies
 
