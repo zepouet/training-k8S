@@ -7,4 +7,6 @@
 # JOUR 2
 
 - [x] Configuration
+  - [x] Configuration
+  - [ ] Configuration
 - [ ] Push my commits to GitHub
