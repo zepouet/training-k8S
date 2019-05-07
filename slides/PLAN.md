@@ -14,8 +14,8 @@
   - [x] ClusterIP
   - [x] NodePort
   - [x] LoadBalancer
-    - [ ] TP Demo DO
-    - [ ] MetalLB
+    - Principe Cloud Provider
+    - MetalLB
   - [x] Service Discovery
 - [ ] Ingress
 - [x] Storage
@@ -37,22 +37,22 @@
   - [x] ConfigMap
   - [x] Secrets
   - [ ] Vault
-- Objets complémentaires
+- [ ] Objets complémentaires
   - [ ] DaemonSets
-    - [ ] Principe
-    - [ ] Gestion des logs
+    - Principe
+    - Gestion des logs
   - [ ] StatefulSets
-    - [ ] Principe
-    - [ ] TP : PostgreSQL
+    - Principe
+    - TP : PostgreSQL
   - [ ] Jobs
-    - [ ] Concepts
-    - [ ] TP : CronJob
-  - Limitations de ressources
-    - [ ] Concepts
-    - [ ] Exemple CPU / Mémoire
-  - Autoscaling
-    - [ ] Concepts
-    - [ ] Exemple : File de messages
-  - Network Policies
-  - [ ] Concepts
-  - [ ] Exemple : Calico
+    - Concepts
+    - TP : CronJob
+  - [ ] Limitations de ressources
+    - Concepts
+    - Exemple CPU / Mémoire
+  - [ ] Autoscaling
+    - Concepts
+    - Exemple : File de messages
+  - [ ] Network Policies
+    - Concepts
+    - Exemple : Calico
