@@ -37,7 +37,7 @@
   - [x] ConfigMap
   - [x] Secrets
   - [ ] Vault
-- [x] Complements
+- [x] Configuration
   - [x] DaemonSets
     - Principe
     - Gestion des logs
