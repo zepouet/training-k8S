@@ -16,7 +16,7 @@
   - [x] Load Balancer
     - [x] Principe Cloud Provider
     - [x] Metal LB
-  - [x] Service Discovery
+  - [x] Service Discovery
 - [ ] Ingress
 - [x] Storage
   - [x] Persistent Volume
