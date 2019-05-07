@@ -47,12 +47,12 @@
   - [ ] Jobs
     - Concepts
     - TP : CronJob
-  - [ ] Limitations de ressources
-    - Concepts
-    - Exemple CPU / Mémoire
-  - [ ] Autoscaling
-    - Concepts
-    - Exemple : File de messages
-  - [ ] Network Policies
-    - Concepts
-    - Exemple : Calico
+- [ ] Limitations de ressources
+  - [ ] Concepts
+  - [ ] Exemple CPU / Mémoire
+- [ ] Autoscaling
+  - [ ] Concepts
+  - [ ] Exemple : File de messages
+- [ ] Network Policies
+  - [ ] Concepts
+  - [ ] Exemple : Calico
