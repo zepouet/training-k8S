@@ -11,7 +11,7 @@
   - [ ] Namespaces
 - [ ] Namespaces et Quotas
 - [x] Services
-  - [x] ClusterIP
+  - [x] ClusterIP
   - [x] NodePort
   - [x] LoadBalancer
     - Principe Cloud Provider
