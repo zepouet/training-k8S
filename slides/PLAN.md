@@ -37,14 +37,14 @@
   - [x] ConfigMap
   - [x] Secrets
   - [ ] Vault
-- [ ] Complements
-  - [ ] DaemonSets
+- [x] Complements
+  - [x] DaemonSets
     - Principe
     - Gestion des logs
-  - [ ] StatefulSets
+  - [ ] StatefulSets
     - Principe
     - TP : PostgreSQL
-  - [ ] Jobs
+  - [ ] Jobs
     - Concepts
     - TP : CronJob
 - [ ] Limitations de ressources
