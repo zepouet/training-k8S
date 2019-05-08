@@ -211,6 +211,13 @@ kubectl port-forward
 --------
 
 
+### EXERCICE
+#### Services / nodeport
+
+
+--------
+
+
 ### External Name
 #### Résolution DNS
 
@@ -264,6 +271,31 @@ spec:
 --------
 
 
+#### Service Headless
+
+- Un service headless consiste à désactiver le clusterIP (**None**)
+- La résolution DNS interne renverra l’adresse IP de chaque pod
+- Utilisé pour demander au serveur DNS interne de Kubernetes de renvoyer l’adresse IP des pods à la place d’une IP de loadbalancer (Besoin d'un LB applicatif )
+
+~~~
+apiVersion: v1
+kind: Service
+metadata:
+  name: pgpool
+spec:  
+  ports:
+    - name: pg
+      port: 1234
+    ClusterIP: None
+    selector:
+      app: pgpool
+~~~
+
+
+
+--------
+
+
 ### EndPoint
 #### Définition
 <br/>
@@ -306,22 +338,5 @@ subsets:
 --------
 
 
-#### Service Headless
-
-- Un service headless consiste à désactiver le clusterIP (**None**)
-- La résolution DNS interne renverra l’adresse IP de chaque pod
-- Utilisé pour demander au serveur DNS interne de Kubernetes de renvoyer l’adresse IP des pods à la place d’une IP de loadbalancer (Besoin d'un LB applicatif )
-
-~~~
-apiVersion: v1
-kind: Service
-metadata:
-  name: pgpool
-spec:  
-  ports:
-    - name: pg
-      port: 1234
-    ClusterIP: None
-    selector:
-      app: pgpool
-~~~
+### EXERCICE
+#### Services / endpoints
