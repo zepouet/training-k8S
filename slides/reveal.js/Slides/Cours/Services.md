@@ -15,6 +15,15 @@ L'objet Service peut être vu naïvement comme un LoadBalancer entre pods.
 --------
 
 
+#### Vue naive
+
+<img src="Slides/Img/Services/abstractview.png" width="500px" />
+
+
+--------
+
+
+
 ### Différents types
 
 - ClusterIP
@@ -207,12 +216,38 @@ kubectl port-forward
 - Attention si les noeuds sont publics aux accès direct **NodePort**
 
 
+--------
+
+
+### Services
+#### Petite overview
+
+
+<img src="Slides/Img/Services/overview.png" width="60%" />
+
 
 --------
 
 
 ### EXERCICE
 #### Services / nodeport
+
+
+--------
+
+
+### Exposition
+#### Impérative
+
+En partant d'un déploiement **nginx-deployment** existant,
+
+```
+kubectl expose deployment nginx-deployment
+        --port=80
+        --target-port=80
+        --name=webserver-svc
+        --type=NodePort
+```
 
 
 --------

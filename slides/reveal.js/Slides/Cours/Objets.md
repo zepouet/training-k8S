@@ -82,7 +82,8 @@
 
 
 
-### EXERCICE PODS
+### EXERCICE
+#### PODS
 
 
 
@@ -90,19 +91,13 @@
 
 
 
-### EXERCICE LABELS
+### EXERCICE
+#### LABELS
 
 
 
 --------
 
-
-
-### EXERCICE PROBES
-
-
-
---------
 
 
 
@@ -147,6 +142,12 @@
 --------
 
 
+<img src="Slides/Img/objets/replicas.png" width="60%" />
+
+
+--------
+
+
 
 ### Les ReplicaSets
 
@@ -161,6 +162,7 @@
 
 #### ReplicationController // ReplicaSets
 
+
 - Les ReplicaSet disposent de presque toutes les mêmes commandes que les ReplicationController
 - Plus de possibilités avec les Selectors que les ReplicationController
 - Ne permet d'utiliser la commande **rolling-update rc/...** qui est déclarative
@@ -172,7 +174,8 @@
 
 
 
-EXERCICE REPLICASETS
+### EXERCICE
+#### REPLICASETS
 
 
 
@@ -215,56 +218,5 @@ EXERCICE REPLICASETS
 
 
 
-EXERCICE DEPLOYMENTS
-
-
-
---------
-
-
-
-### Les DaemonSets
-
-
-- Ce contrôleur assure qu'un pod tourne sur tous les noeuds ou une sélection
-- Lors d'un ajout de noeud, le pod est automatiquement déployé
-- Les DaemonSets sont utilisés pour les applications systèmes comme:
-<br/> - un système de stockage comme Gluster, Ceph
-<br/> -  un système de gestion de logs comme FluentD, logstash...
-<br/> -  un système de monitoring comme Prometheus, CollectD...
-
-
---------
-
-
-<img src="Slides/Img/Architecture/daemonset.yaml.png" />
-
-
---------
-
-
-### Persistent Volumes
-
-
-<img src="Slides/Img/Architecture/volumes.png" width="60%" />
-
-
---------
-
-
-#### Persistent Volumes
-
-- Aucune garantie d'avoir un pod fonctionnant indéfinimment sur le même noeud
-- Le système de fichier persistant n'est pas géré par le cluster via ETCD
-- Des disques locaux ou distants peuvent être montés
-
-
---------
-
-
-
-EXERCICE VOLUMES
-
-
-
-
+### EXERCICE
+#### DEPLOYMENTS

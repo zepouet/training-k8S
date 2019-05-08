@@ -3,6 +3,27 @@
 > Applications Statefuls mais pas que...
 
 
+<img src="Slides/Img/Architecture/volumes.png" width="60%" />
+
+
+--------
+
+
+#### Persistent Volumes
+
+- Aucune garantie d'avoir un pod fonctionnant indéfinimment sur le même noeud
+- Le système de fichier persistant n'est pas géré par le cluster via ETCD
+- Des disques locaux ou distants peuvent être montés
+
+
+--------
+
+
+
+EXERCICE VOLUMES
+
+
+
 --------
 
 ### Problématique
