@@ -20,7 +20,7 @@ kubernetes      209.97.180.71:6443                  3h35m
 
 ## Créer de nouveaux endpoints
 
-Créer le fichier **nginx-ingress.yaml**
+Créer le fichier **nginx-ingress.yml**
 
 ```
 apiVersion: apps/v1
@@ -63,7 +63,7 @@ spec:
 
 Créer les ressources:
 ```
-kubectl apply -f [manifest file].yml
+kubectl apply -f nginx-ingress.yml
 ```
 
 Exécuter la commande:
@@ -117,4 +117,63 @@ Commercial support is available at
 </html>
 ```
 
-###
+## Créer un nouvel objet EndPoint
+
+Créer le fichier suivant en reportant bien l'IP d'un des
+
+```
+apiVersion: "v1"
+kind: "Service"
+metadata:
+  name: "external-web"
+spec:
+  ports:
+    -
+      name: "apache"
+      protocol: "TCP"
+      port: 80
+      targetPort: 80
+---
+apiVersion: "v1"
+kind: "Endpoints"
+metadata:
+  name: "external-web"
+subsets:
+  -
+    addresses:
+      -
+        ip: "10.233.77.130" #The IP Address of the external web server
+    ports:
+      -
+        port: 80
+        name: "apache"
+```        
+
+Créer les ressources:
+
+```
+kubectl apply -f endpoint.yml
+```
+
+Puis observer le nouvel endpoint créé:
+
+```
+kubectl get endpoints
+
+NAME            ENDPOINTS                           AGE
+external-web    10.233.77.130:80                    60s
+ingress-nginx   10.233.77.130:80,10.233.87.198:80   24m
+kubernetes      209.97.180.71:6443                  3h43m
+```
+
+Créer désormais un container éphémère pour accéder à cet endpoint via son nom DNS:
+
+```
+kubectl create -f https://k8s.io/examples/application/shell-demo.yaml
+
+kubectl exec -it shell-demo -- /bin/bash
+
+apt-get update
+apt-get install -y curl
+curl external-web
+``` 
