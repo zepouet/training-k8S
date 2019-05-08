@@ -129,7 +129,7 @@ metadata:
 spec:
   ports:
     -
-      name: "apache"
+      name: "fake-apache"
       protocol: "TCP"
       port: 80
       targetPort: 80
@@ -146,7 +146,7 @@ subsets:
     ports:
       -
         port: 80
-        name: "apache"
+        name: "fake-apache"
 ```        
 
 Créer les ressources:
@@ -176,4 +176,4 @@ kubectl exec -it shell-demo -- /bin/bash
 apt-get update
 apt-get install -y curl
 curl external-web
-``` 
+```
