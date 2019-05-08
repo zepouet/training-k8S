@@ -8,12 +8,6 @@
     version: "{{ kubespray_version }}"
 
 
-- name: Get Treeptik resources
-  git:
-    repo: https://github.com/Treeptik/training-k8s-resources.git
-    dest: ./Treeptik-resources
-    force: yes
-
 - name: Export SSH private key
   copy:
     src: "{{ ansible_ssh_private_key_file }}"

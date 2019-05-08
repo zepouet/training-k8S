@@ -1,39 +1,41 @@
-## Les différents services
-
-> L'objet Service peut être vu naïvement comme un LoadBalancer entre pods
-
->Il s'agit surtout de proposer plusieurs points d'accès en fonction du type de ressource.
+## Services
 
 
 --------
 
 
-#### Trois types différents
+### Definition
+
+<br/>
+```text
+L'objet Service peut être vu naïvement comme un LoadBalancer entre pods.
+```
+
+
+--------
+
+
+### Différents types
 
 - ClusterIP
 - NodePort
 - LoadBalancer
+- ExternalName
 
-Ainsi que la notion de *Ingress*
-
+<br/>
+* *Ingress* n'est pas un Service au sens K8S
+* L'objet **EndPoint** sera vu par contre
 
 
 --------
 
 
 ### ClusterIP
+#### Type par défaut
 
-> Type par défaut
-
-> Une IP virtuelle est fourni par K8S pour l'accès entre Pods
-
-
---------
-
-
-
-<img src="Slides/Img/Services/clusterIp.yaml.png" />
-
+<br/>
+> Une IP virtuelle est fournie<br/>
+> par K8S pour l'accès entre Pods
 
 
 --------
@@ -46,35 +48,32 @@ Ainsi que la notion de *Ingress*
 --------
 
 
+<img src="Slides/Img/Services/clusterIp.yaml.png" />
+
+
+
+--------
+
+
 #### Cluster IP
 
+<br/>
 - Pas d'accès externe. Uniquement interne
-- Accessible via un ReverseProxy **kube-proxy**
+- Accessible via un ReverseProxy **port-forward**
 
-> kubectl proxy --port=8080
-
-
-
---------
-
-
-#### Accès via kube-proxy
-
-<p>
- http://localhost:8080/api/v1/proxy/namespaces/<NAMESPACE>/services/<SERVICE-NAME>:<PORT-NAME>/
-<p/>
-
-<p>
- http://localhost:8080/api/v1/proxy/namespaces/default/services/my-internal-service:http/
-</p>
+<br/>
+```shell
+kubectl port-forward
+        svc/my-internal-service 8080:80
+```
 
 
 --------
 
 
-#### Quand utiliser Kube Proxy ?
+#### Quand utiliser port-forward ?
 
-
+<br/>
 - Debugger des services directement depuis votre poste
 - Autoriser des traffics externes (Client Mysql...)
 - Afficher des dashboards internes
@@ -84,18 +83,17 @@ Ainsi que la notion de *Ingress*
 --------
 
 
+
 ### NodePort
-
-
---------
-
-
-## Traffic extérieur
+#### Traffic extérieur
 
 
 > Approche la plus basique pour exposer un pod vers l'extérieur.
 
-Ouvre un port sur tous les nodes
+<br/>
+* Se marie bien avec un F5 par exemple
+* Ouvre un port sur tous les nodes
+
 
 
 --------
@@ -116,38 +114,51 @@ Ouvre un port sur tous les nodes
 
 --------
 
+### NodePort
+#### Spécificités
 
-#### Champ spécifique
+<br/>
+- Champs **nodePort** est optionnel
+- Permet de choisir le port à exposer
+- Conseillé de laisser K8S le fixer lui-même
+- Un **ClusterIP** est créé automatiquement
 
-- **nodePort** est optionnel
-- Il permet de choisir le port à exposer
-- Il est conseillé de laisser K8S le fixer lui-même
 
 
 --------
 
 
-#### Inconvénients de NodePort
+### NodePort
+#### Cas d'usage
+<br/>
 
+> Peu recommandé en production
+
+- Devrait se trouver derrière un F5
+- Utilisable avec un ReverseProxy type **Traefik**
+
+
+
+--------
+
+
+### NodePort
+#### Inconvénients
+
+<br/>
 - Seulement un accès d'un service pour un port donné
 - Plage restreinte de 30000 à 32767
-- Si les IPs de vos nodes changent, vous devez gérer ceci en amont 
+- Si les IPs de vos nodes changent, vous devez gérer ceci en amont
 
 
 --------
 
-
-#### Cas d'usage de NodePort
-
-> Usage possible mais peu recommandé en production
-
-- Utile pour des demos
-- Potentiellement utilisable avec un ReverseProxy type Traefik
-
-
---------
 
 ### LoadBalancer
+
+
+<br/>
+> Exposer directement un service sur Internet
 
 
 --------
@@ -158,33 +169,82 @@ Ouvre un port sur tous les nodes
 --------
 
 
-#### Cas d'usage de LoadBalancer
+### LoadBalancer
+#### Spécificités
+<br/>
+* Création automatique **NodePort** et **ClusterIP**
+* Disponible *de facto* sur les Cloud provider
+* Doit s'installer indépendamment on-premise (Metal LB) https://metallb.universe.tf/
 
-> Exposer directement un service sur Internet
 
-- Tout le traffic sera redirigé vers le service
-- Pas de filtering, routing...
-- Tout type de traffic est routé : HTTP, gRPC, UDP, WebSocket...
-- S'utilise avec les Cloud providers
 
 --------
 
 
-#### Inconvénients de LoadBalancer
 
+### LoadBalancer
+#### Avantages
+
+
+<br/>
+- Tout le traffic sera redirigé vers le service
+- Gère la charge dynamiquement
+- Gestion de la sécurité (WAF)
+- Gère tout type de traffic : HTTP, gRPC, UDP, WebSocket...
+
+
+--------
+
+
+### LoadBalancer
+#### Inconvénients
+
+<br/>
 > Le coût sur le Cloud Public
 
-- Chaque service va exposer un Load Balancer avec sa propre IP
-- https://cloud.google.com/compute/docs/load-balancing/network/.
+<br/>
+- Chaque service va exposer un LoadBalancer avec sa propre IP
+- Attention si les noeuds sont publics aux accès direct **NodePort**
+
 
 
 --------
 
+
+### External Name
+#### Résolution DNS
+
+<br/>
+```
+kind: Service
+apiVersion: v1
+metadata:
+  name: my-service
+  namespace: prod
+spec:
+  type: ExternalName
+  externalName: my.database.example.com
+```
+
+
+--------
+
+
+### Propriétés des services
 #### Service avec Selecteur
 
-- Il permet de renvoyer le trafic vers un ensemble de pods présents dans le même namespace.
-- L’identification des pods vers lesquels diriger le trafic est basée sur des labels et des sélecteurs.
+<br/>
+- Permet de renvoyer le trafic vers un ensemble de pods présents dans le même namespace.
+- Identification des pods vers lesquels diriger le trafic est basée sur des labels et des sélecteurs.
 
+
+--------
+
+
+### nodePort
+#### Exemple
+
+<br/>
 ~~~
 apiVersion: v1
 kind: Service
@@ -204,9 +264,22 @@ spec:
 --------
 
 
+### EndPoint
+#### Définition
+<br/>
+
+> Abstraction d'un ensemble de ressources internes <br/>ou externes au cluster avec respect de **policy**
+
+<br/>
+Le **EndPoint** n'utilise pas les sélecteurs <br/>de labels contrairement aux **Service**
+
+
+--------
+
+
+### EndPoint
 #### Service sans Selecteur
 
-Il permet de renvoyer le trafic vers des pods présents dans un autre namespace ou vers des services extérieurs au cluster K8S.
 
 ~~~
 apiVersion: v1
@@ -235,9 +308,9 @@ subsets:
 
 #### Service Headless
 
-- Un service headless consiste à désactiver le clusterIP.
-- La résolution DNS interne renverra l’adresse IP de chaque pod.
-- Ce type de service est principalement utilisé pour demander au serveur DNS interne de Kubernetes de renvoyer l’adresse IP des pods à la place d’une IP de loadbalancer.
+- Un service headless consiste à désactiver le clusterIP (**None**)
+- La résolution DNS interne renverra l’adresse IP de chaque pod
+- Utilisé pour demander au serveur DNS interne de Kubernetes de renvoyer l’adresse IP des pods à la place d’une IP de loadbalancer (Besoin d'un LB applicatif )
 
 ~~~
 apiVersion: v1
@@ -252,71 +325,3 @@ spec:
     selector:
       app: pgpool
 ~~~
-
-
---------
-
-
-### Ingress
-
-#### PAS UN SERVICE MAIS...
-
-
---------
-
-
-<img src="Slides/Img/Services/ingress-wall.png" width="60%" />
-
-
---------
-
-
-<img src="Slides/Img/Services/ingress.png" width="70%" />
-
-
-
---------
-
-
-> SMART ROUTER
-
-- Il gère les entrypoints pour votre cluster
-- Il existe de nombreux Ingress Controller
-- Par défaut GKE démarrera un HTPP(s) Load Balancer
-
-
---------
-
-
-<img src="Slides/Img/Services/ingress.yaml.png" width="80%" />
-
-
-
---------
-
-
-#### Cas d'usage de Ingress
-
-> Le plus puissant mais le plus compliqué
-
-- Volonté d'exposer différents services sous la même IP
-- Nécessité d'utiliser le même protocole L7 (typiquement HTTP)
-- Ne payer qu'un seul LoadBalancer sur GKE tout en profitant avec Nginx de SSL, Auth, Routing...
-- Peut devenir un point de contention // LoadBalancer en option précédente.
-
-
---------
-
-
-### EXERCICE SERVICES
-
-
---------
-
-
-
-### DEMO
-
-<p>
-  https://github.com/sozu-proxy/sozu-demo/tree/master/kubernetes-using-tube-cheese
-</p>
