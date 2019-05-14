@@ -65,23 +65,53 @@ REDIS_MASTER_PORT_6379_TCP_ADDR=10.0.0.11
 --------
 
 
-#### Principe
+
+### Service Discovery
+#### Variables d'environment
+##### Inconvénient
 
 <br/>
-Ce mécanisme est basé soit sur
-* KubeDNS
-* CoreDNS
+* L'ordre de création POD / SVC compte
 
 
 --------
 
-#### STATUS QUO
+
+### EXERCICE
+#### Services / Discovery / ENV
+
+
+--------
+
+
+
+### DNS
+#### Méthode conseillée
+
+
+--------
+
+
+### DNS
+#### Principe
 
 Ceci permet aux applications de communiquer facilement<br/>
 les unes avec les autres lorsqu'un pod ou un service est :<br/>
 * créé
 * supprimé
 * déplacé d'un noeud à l'autre
+
+
+--------
+
+
+### DNS
+#### Principe
+
+<br/>
+Ce mécanisme est basé soit sur
+* KubeDNS
+* CoreDNS
 
 
 --------
@@ -96,12 +126,6 @@ les unes avec les autres lorsqu'un pod ou un service est :<br/>
 --------
 
 
-### Service Discovery
-#### DNS
-
-Méthode conseillée
-
-
 ### KUBE DNS
 #### Service
 
@@ -112,6 +136,7 @@ Le **kube-dns** service antérieur à **K8S 1.11** est composé
 
 
 --------
+
 
 ### KUBE DNS
 #### 3 containers
@@ -156,3 +181,10 @@ Fixe de nombreuses issues de **kube-dns** et apporte en plus
 * Production ready
 * Un seul process Go
 * Un seul process container
+
+
+--------
+
+
+### EXERCICE
+#### Services / Discovery / DNS
