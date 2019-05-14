@@ -220,7 +220,7 @@ kubectl port-forward
 
 
 ### Services
-#### Petite overview
+#### Conclusion intermédiaire
 
 
 <img src="Slides/Img/Services/overview.png" width="60%" />
