@@ -18,10 +18,10 @@ You can run Ark in clusters on a cloud provider or on-premises.
 As CRD, it is installed into the cluster itself.
 
 ```
-mkdir ark-demo
-cd ark-demo
-wget https://github.com/heptio/ark/releases/download/v0.10.1/ark-v0.10.1-linux-amd64.tar.gz
-tar xvf ark-v0.10.1-linux-amd64.tar.gz
+mkdir velero-demo
+cd velero-demo
+wget https://github.com/heptio/velero/releases/download/v0.11.0/velero-v0.11.0-linux-amd64.tar.gz
+tar xvf velero-v0.11.0-linux-amd64.tar.gz
 ```
 
 ## Use Minio as Storage platform
