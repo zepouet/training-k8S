@@ -29,8 +29,10 @@ Consultant DEVOPS - Treeptik
 - Architecture
 - Objets
 - Services
+- Service Discovery
+- Ingress
 - Networking
 - Solution de stockage
 - Configuration
 - Orchestration
-- Pour finir
+- Administration

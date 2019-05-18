@@ -11,7 +11,7 @@ Pour faire une action de rolling-update ou de rollout sur un ReplicaSet, il est 
 
 ## Créer son premier Deployment
 
-Copier le contenu dans le fichier **nginx.yaml**
+Copier le contenu dans le fichier **nginx0.yaml**
 
 ```
 apiVersion: extensions/v1beta1
@@ -36,7 +36,7 @@ spec:
 Créer le déploiement:
 
 ```
-kubectl create -f nginx.yaml
+kubectl create -f nginx0.yaml
 deployment "nginx" created
 ```
 
@@ -56,6 +56,13 @@ NAME                     READY     STATUS    RESTARTS   AGE
 nginx-3322722759-7vp34   1/1       Running   0          14m
 nginx-3322722759-ip5w2   1/1       Running   0          14m
 nginx-3322722759-q97b7   1/1       Running   0          14m
+```
+
+Editer le fichier **nginx0.yaml** et passer le nombre de réplicas à 5
+
+```
+kubectl replace -f nginx0.yaml
+deployment.extensions/nginx replaced
 ```
 
 
@@ -106,7 +113,7 @@ spec:
         - containerPort: 80
 ```
 
-Déployons la nouvelle version : 
+Déployons la nouvelle version :
 ```
 kubectl apply -f nginx.yaml --record
 ```
@@ -148,7 +155,7 @@ kubectl replace -f nginx.yaml
 kubectl edit deployment nginx --record
 ```
 
-Modifier la valeur 
+Modifier la valeur
 
 ```
 # Please edit the object below. Lines beginning with a '#' will be ignored,
@@ -176,13 +183,13 @@ metadata:
 kubectl rollout status deployment nginx
 ```
 
-### Pause Rolling Update 
+### Pause Rolling Update
 
 ```
 kubectl rollout pause deployment nginx
 ```
 
-### Resume Rolling Update 
+### Resume Rolling Update
 
 ```
 kubectl rollout resume deployment nginx
