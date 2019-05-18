@@ -7,6 +7,7 @@
 ## Pourquoi utiliser les Deployments ?
 
 Un ReplicaSet ne peut fournir de service de rolling-update que les ReplicationController savent faire.
+
 Pour faire une action de rolling-update ou de rollout sur un ReplicaSet, il est nécessaire d'utiliser un Deployment de façon déclarative.
 
 ## Créer son premier Deployment
@@ -65,7 +66,7 @@ kubectl describe deployment/nginx
 
 Name:                   nginx
 Namespace:              default
-CreationTimestamp:      Sat, 18 May 2019 15:00:55 +0000
+CreationTimestamp:      Mon, 18 Apr 2019 15:00:55 +0000
 Labels:                 service=http-server
 Annotations:            deployment.kubernetes.io/revision: 1
 Selector:               service=http-server
@@ -95,6 +96,8 @@ Events:
   Normal  ScalingReplicaSet  6s    deployment-controller  Scaled up replica set nginx-859d69c8cd to 3
 ```
 
+## Impératif par fichier
+
 Editer le fichier **nginx0.yaml** et passer le nombre de réplicas à 5
 
 ```
@@ -105,7 +108,7 @@ deployment.extensions/nginx replaced
 Afficher les pods :
 
 ```
-kubectl get pod
+kubectl get pods
 ```
 
 Que constatez vous ?
@@ -153,28 +156,7 @@ nginx-79fc79777b-xv8c4   1/1     Running   0          21s
 
 Réponse : Tous les pods ont été remplacés dans le quasi laps de temps.
 
-
-  
-
-
-
-## ROLLING UPDATE
-
-Ajouter ceci dans la partie **.spec**
-```
-minReadySeconds: 5
-strategy:
-  # indicate which strategy we want for rolling update
-  type: RollingUpdate
-  rollingUpdate:
-    maxSurge: 1
-    maxUnavailable: 1
-```
-
-Explications:
-* minReadySeconds: attente minimale entre la création de deux pods
-* maxSurge: nombre de pods qui vont s'ajouter au nombre désiré (absolu ou pourcentage)
-* maxUnavailable: nombre de pods qui peuvent être indisponible durant la mise à jour
+Créer le fichier **nginx1.yaml** avec le bloc spécifique **strategy**
 
 ```
 apiVersion: extensions/v1beta1
@@ -182,7 +164,7 @@ kind: Deployment
 metadata:
   name: nginx
 spec:
-  replicas: 3
+  replicas: 5
   selector:
     matchLabels:
       service: http-server
@@ -191,7 +173,7 @@ spec:
     rollingUpdate:
       maxSurge: 1
       maxUnavailable: 1
-  minReadySeconds: 5
+  minReadySeconds: 10
   template:
     metadata:
       labels:
@@ -199,18 +181,25 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: nginx:1.10.2
+        image: nginx:1.12
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 80
 ```
 
+Explications:
+* minReadySeconds: attente minimale entre la création de deux pods
+* maxSurge: nombre de pods qui vont s'ajouter au nombre désiré (absolu ou pourcentage)
+* maxUnavailable: nombre de pods qui peuvent être indisponible durant la mise à jour
+
 Déployons la nouvelle version :
 ```
-kubectl apply -f nginx.yaml --record
+kubectl replace -f nginx.yaml
+
+kubectl get pods -w
 ```
 
-## Mise à jour de l'image
+## Impératif en ligne de commande
 
 ### Choix 1 - Redéfinition du tag Image
 
