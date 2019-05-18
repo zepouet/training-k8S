@@ -24,8 +24,7 @@ Vous pouvez remarquer qu'aucuun **Deployment** vient également d'être créé c
 
 `kubectl get deployment`
 
-Vous pouvez accéder en local à l'application via 
-
+Dans le cas où vous vous trouvez directement en ssh sur un noeud du cluster,  vous pouvez accéder en local à l'application via 
 `curl 10.233.69.80:8080`
 
 Vous pouvez également rentrer dans le container et y accéder en local :
