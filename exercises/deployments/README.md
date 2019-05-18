@@ -58,6 +58,43 @@ nginx-3322722759-ip5w2   1/1       Running   0          14m
 nginx-3322722759-q97b7   1/1       Running   0          14m
 ```
 
+Afficher le détail du déploiement
+
+```
+kubectl describe deployment/nginx
+
+Name:                   nginx
+Namespace:              default
+CreationTimestamp:      Sat, 18 May 2019 15:00:55 +0000
+Labels:                 service=http-server
+Annotations:            deployment.kubernetes.io/revision: 1
+Selector:               service=http-server
+Replicas:               3 desired | 3 updated | 3 total | 3 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  1 max unavailable, 1 max surge
+Pod Template:
+  Labels:  service=http-server
+  Containers:
+   nginx:
+    Image:        nginx:1.10.2
+    Port:         80/TCP
+    Host Port:    0/TCP
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+OldReplicaSets:  <none>
+NewReplicaSet:   nginx-859d69c8cd (3/3 replicas created)
+Events:
+  Type    Reason             Age   From                   Message
+  ----    ------             ----  ----                   -------
+  Normal  ScalingReplicaSet  6s    deployment-controller  Scaled up replica set nginx-859d69c8cd to 3
+```
+
 Editer le fichier **nginx0.yaml** et passer le nombre de réplicas à 5
 
 ```
@@ -65,10 +102,65 @@ kubectl replace -f nginx0.yaml
 deployment.extensions/nginx replaced
 ```
 
+Afficher les pods :
+
+```
+kubectl get pod
+```
+
+Que constatez vous ?
+
+```
+NAME                     READY   STATUS    RESTARTS   AGE
+nginx-67b67f7678-nm42b   1/1     Running   0          21s
+nginx-67b67f7678-tcsfz   1/1     Running   0          21s
+nginx-67b67f7678-tsqjq   1/1     Running   0          3s
+nginx-67b67f7678-w785k   1/1     Running   0          3s
+nginx-67b67f7678-wsqw5   1/1     Running   0          21s
+```
+
+Réponse : De nouveaux pods ont été rajoutés.
+
+Editer à nouveau le fichier **nginx0.yaml** pour changer la version de l'image en **1.10.2** en **1.11.5**
+
+```
+kubectl replace -f nginx0.yaml
+kubectl get pod
+```
+
+Que constatez vous ?
+
+```
+NAME                     READY   STATUS              RESTARTS   AGE
+nginx-67b67f7678-nm42b   1/1     Running             0          2m56s
+nginx-67b67f7678-tcsfz   1/1     Running             0          2m56s
+nginx-67b67f7678-tsqjq   1/1     Terminating         0          2m38s
+nginx-67b67f7678-w785k   0/1     Terminating         0          2m38s
+nginx-67b67f7678-wsqw5   1/1     Running             0          2m56s
+nginx-79fc79777b-t6rjp   0/1     ContainerCreating   0          2s
+nginx-79fc79777b-w452p   1/1     Running             0          2s
+nginx-79fc79777b-xv8c4   0/1     ContainerCreating   0          0s
+```
+
+```
+NAME                     READY   STATUS    RESTARTS   AGE
+nginx-79fc79777b-6bnwq   1/1     Running   0          19s
+nginx-79fc79777b-frp95   1/1     Running   0          21s
+nginx-79fc79777b-t6rjp   1/1     Running   0          23s
+nginx-79fc79777b-w452p   1/1     Running   0          23s
+nginx-79fc79777b-xv8c4   1/1     Running   0          21s
+```
+
+Réponse : Tous les pods ont été remplacés dans le quasi laps de temps.
+
+
+  
+
+
 
 ## ROLLING UPDATE
 
-Ajouter ceci dans la **premier** bloc **.spec**. Pas le second
+Ajouter ceci dans la partie **.spec**
 ```
 minReadySeconds: 5
 strategy:
