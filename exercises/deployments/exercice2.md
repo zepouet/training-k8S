@@ -11,9 +11,11 @@ Pour faire une action de rolling-update ou de rollout sur un ReplicaSet, il est 
 
 ## Créer son premier Deployment
 
-Copier le contenu dans le fichier **dep.yaml**
+Copier le contenu dans le fichier **tomcat-dep.yml**
 
 ```
+kubectl apply -f tomcat-dep.yml --record
+
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
@@ -61,8 +63,7 @@ kubectl exec -it tomcat-deploy-5777588498-qrbvs env | grep URL_WS
 URL_WS=https://foo.01.ws.com
 ```
 
-
-Editer le fichier "dep.yaml" pour y changer de la variable d'environnement URL_WS
+Editer le fichier "tomcat-dep.yaml" pour y changer de la variable d'environnement URL_WS
 
 ```
 apiVersion: apps/v1beta1
@@ -87,10 +88,17 @@ spec:
           value: "https://foo.02.ws.com"
 ```
 
+Tentez de déployer la modification avec :
+
+```
+kubectl create -f tomcat-dep.yml
+Error from server (AlreadyExists): error when creating "tomcat-dep.yml": deployments.apps "tomcat-deploy" already exists
+```
+
 Pour déployer la modification, vous ne devez pas utiliser la commande **create** mais bien **apply**.
 
 ```
-kubectl apply -f dep.yaml
+kubectl apply -f tomcat-dep.yml --record
 deployment.apps "tomcat-deploy" configured
 
 kubectl get pods
@@ -120,19 +128,42 @@ kubectl exec -it tomcat-deploy-7d54877fdd-blrg2 env | grep URL_WS
 URL_WS=https://foo.02.ws.com
 ```
 
-### Faire un RollBack
-
 Pour lister les versions disponibles :
 
 ```
 kubectl rollout history deployment
 
-deployments "tomcat-deploy"
 REVISION  CHANGE-CAUSE
-1         <none>
-2         <none>
-3         <none>
+1         kubectl apply --filename=tomcat-dep.yml --record=true
 ```
+
+Editer le fichier "tomcat-dep.yaml" pour y changer de la variable d'environnement URL_WS
+en la mettant à **URL_WS=https://foo.03.ws.com**
+
+Cette fois-ci, vous ne devez pas mettre l'option **--record**
+
+```
+kubectl apply -f tomcat-dep.yml
+deployment.apps "tomcat-deploy" configured
+
+REVISION  CHANGE-CAUSE
+1         kubectl apply --filename=tomcat-dep.yml --record=true
+2         <none>
+```
+
+Il est possible de rajouter l'information *a posteriori*
+
+```
+kubectl annotate deployment.extensions/tomcat-deploy kubernetes.io/change-cause=xxxxxxxxx
+
+kubectl rollout history deployment
+REVISION  CHANGE-CAUSE
+1         kubectl apply --filename=tomcat-dep.yml --record=true
+2         xxxxxxxxx
+```
+
+### Faire un RollBack
+
 
 Il est possible de revenir en arrière avec :
 
@@ -160,9 +191,3 @@ deployment.extensions "tomcat-deploy" deleted
 kubectl get pods
 No resources found.
 ```
-
-
-
-
-
-
