@@ -63,7 +63,7 @@ kubectl exec -it tomcat-deploy-5777588498-qrbvs env | grep URL_WS
 URL_WS=https://foo.01.ws.com
 ```
 
-Editer le fichier "tomcat-dep.yaml" pour y changer de la variable d'environnement URL_WS
+Editer le fichier "tomcat-dep.yml" pour y changer de la variable d'environnement URL_WS
 
 ```
 apiVersion: apps/v1beta1
@@ -137,7 +137,7 @@ REVISION  CHANGE-CAUSE
 1         kubectl apply --filename=tomcat-dep.yml --record=true
 ```
 
-Editer le fichier "tomcat-dep.yaml" pour y changer de la variable d'environnement URL_WS
+Editer le fichier "tomcat-dep.yml" pour y changer de la variable d'environnement URL_WS
 en la mettant à **URL_WS=https://foo.03.ws.com**
 
 Cette fois-ci, vous ne devez pas mettre l'option **--record**
