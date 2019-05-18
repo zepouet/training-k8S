@@ -61,7 +61,7 @@ nginx-3322722759-q97b7   1/1       Running   0          14m
 
 ## ROLLING UPDATE
 
-Ajouter ceci dans la partie **.spec**
+Ajouter ceci dans la **premier** bloc **.spec**. Pas le second
 ```
 minReadySeconds: 5
 strategy:
