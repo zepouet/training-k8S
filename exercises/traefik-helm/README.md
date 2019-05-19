@@ -10,7 +10,7 @@ https://github.com/eldada/jenkins-in-kubernetes
 
 ## How to deploy Traefik
 
-We will deploy it as Ingress not as DaemonSet. 
+We will deploy it as Ingress not as DaemonSet.
 
 `rbac.enabled=true` to the parameters when running the helm install command creates the necessary account that Traefik needs to run in the kube-system namespace.
 
@@ -52,7 +52,7 @@ NOTES:
 ## Traefik Dashboard
 
 Update your configuration `/etc/hosts`
-And try to access http://dashboard.domain/dashboard/
+And try to access http://dashboard.domain:NODEPORT/dashboard/
 
 **Todo**
 * Tiller TLS configuration

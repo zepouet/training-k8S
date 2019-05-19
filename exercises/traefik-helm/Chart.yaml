@@ -1,6 +1,6 @@
 apiVersion: v1
 description: Helm Chart example-voting-app
-name: jenkins-mastering-k8s
+name: traefik-helm
 keywords:
 - kubernetes
 - example-voting-app

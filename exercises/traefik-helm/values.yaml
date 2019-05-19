@@ -20,4 +20,4 @@ redis:
   fullnameOverride: redis
 
 global:
-  foo: bar
+  foo: hotfix

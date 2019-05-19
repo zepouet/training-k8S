@@ -35,7 +35,6 @@ containers:
   volumeMounts:
   - name: tmp-dir
     mountPath: /tmp
-
   command:
       - /metrics-server
       - --kubelet-insecure-tls
