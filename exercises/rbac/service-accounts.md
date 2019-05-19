@@ -323,3 +323,11 @@ Les informations se trouvent ici par exemple :
 ```
 
 Pour savoir où se trouve un tel fichier, il faut se connecter dans le pod **kube-apiserver** puis faire un **ps | grep kube** pour avoir le détail du processus et ses options.
+
+## Retour en mode ADMINISTRATEUR pour le TP suivant
+
+```
+kubectl config use-context kubernetes-admin@cluster.local
+kubectl config set-context $(kubectl config current-context) --namespace=default
+kubectl delete ns treeptik-namespace
+```
