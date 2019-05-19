@@ -1,6 +1,6 @@
 ## Exercice
 
-Nous allons maintenant créer un "espace étanche" sur votre cluster pour l'utilisateur "treeptik". 
+Nous allons maintenant créer un "espace étanche" sur votre cluster pour l'utilisateur "treeptik".
 
 ### Génération des clés
 
@@ -64,7 +64,7 @@ kubectl config set-context treeptik-context \
                            --cluster=cluster.local
 ~~~
 
-Tentez de lister les pods 
+Tentez de lister les pods
 ~~~bash
 kubectl --context=treeptik-context get pods
 ~~~
@@ -100,7 +100,7 @@ subjects:
   name: treeptik-reader
   apiGroup: ""
 roleRef:
-  kind: Role 
+  kind: Role
   name: deployment-manager-binding
   apiGroup: ""
 ~~~
@@ -148,7 +148,7 @@ kubectl config view --flatten > kubeconfig.cfg
 
 Récupérez le fichier kubeconfig.cfg sur votre machine via scp ou autre.
 
-Configurez la variable d'environnement KUBECONFIG pour la faire pointer sur kubeconfig.cfg: 
+Configurez la variable d'environnement KUBECONFIG pour la faire pointer sur kubeconfig.cfg:
 ~~~bash
 export KUBECONFIG=<path>/kubeconfig.cfg
 ~~~
@@ -157,5 +157,5 @@ export KUBECONFIG=<path>/kubeconfig.cfg
 
 ```
 kubectl config use-context kubernetes-admin@cluster.local
+kubectl delete ns treeptik-namespace
 ```
-
