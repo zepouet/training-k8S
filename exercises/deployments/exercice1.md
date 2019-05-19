@@ -209,53 +209,14 @@ Le format de la mise à jour est le suivant:
 Dans notre cas, ce serait:
 `kubectl set image deployment nginx nginx=nginx:1.11.5 --record`
 
-### Choix 2 - Replacement
-
-Modifier la version de l'image dans le fichier **nginx.yaml**
-
-```
-spec:
-  containers:
-  - name: nginx
-    # newer image version
-    image: nginx:1.11.5
-    imagePullPolicy: IfNotPresent
-    ports:
-    - containerPort: 80
-```
-
-Appliquez la mise à jour avec **replace**
-
-```
-kubectl replace -f nginx.yaml
-```
-
-### Choix 3 - Edition directe
+### Choix 2 - Edition directe
 
 ```
 kubectl edit deployment nginx --record
 ```
 
-Modifier la valeur
+Modifier la valeur de l'image nginx par tomcat
 
-```
-# Please edit the object below. Lines beginning with a '#' will be ignored,
-# and an empty file will abort the edit. If an error occurs while saving this file will be
-# reopened with the relevant failures.
-#
-apiVersion: extensions/v1beta1
-kind: Deployment
-metadata:
-  annotations:
-    deployment.kubernetes.io/revision: "1"
-    kubectl.kubernetes.io/last-applied-configuration: '{"kind":"Deployment","apiVersion":"extensions/v1beta1","metadata":{"name":"nginx","creationTimestamp":null},"spec":{"replicas":10,"template":{"metadata":{"creationTimestam
-...
-    spec:
-      containers:
-      - image: nginx:1.10.2
-        imagePullPolicy: IfNotPresent
-        name: nginx
-...
 ```
 
 ### Rollout status
@@ -298,9 +259,11 @@ kubectl rollout undo deployment nginx
 kubectl rollout undo deployment nginx --to-revision=1
 ```
 
-Pour avoir un historique plus complet :
+Pour spécifier la profondeur de l'historique, ajouter **revisionHistoryLimit: 10**
 
 ```
+kubectl edit deployment nginx --record
+
 ...
 spec:
   replicas: 10

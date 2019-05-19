@@ -17,7 +17,7 @@ metadata:
 Puis créer la ressource
 
 ```
-kubectl create -f api-reader-dev-namespace.yaml 
+kubectl create -f api-reader-dev-namespace.yaml
 ```
 
 Puis changer le namespace par défaut sur le contexte courant.
@@ -58,9 +58,9 @@ kubectl get secrets api-access-secret
 
 ### Créer le ServiceAccount
 
-Vous pouvez attacher des comptes de service aux pods et les utiliser pour accéder à l'API Kubernetes. Si aucun compte de service n'est défini dans la définition du pod, celui-ci utilise le compte de service par défaut pour l'espace-noms. 
+Vous pouvez attacher des comptes de service aux pods et les utiliser pour accéder à l'API Kubernetes. Si aucun compte de service n'est défini dans la définition du pod, celui-ci utilise le compte de service par défaut pour l'espace-noms.
 
-Les fichiers nommés token, ca.crt et namespace sont automatiquement montés dans le répertoire /var/run/secrets/kubernetes.io/serviceaccount/ de chaque conteneur. 
+Les fichiers nommés token, ca.crt et namespace sont automatiquement montés dans le répertoire /var/run/secrets/kubernetes.io/serviceaccount/ de chaque conteneur.
 Leur contenu est basé sur le nom du compte de service que vous avez fourni.
 
 Remarque: les secrets affichés dans le répertoire /var/run/secrets/kubernetes.io/serviceaccount/ sont des secrets spécifiques au compte de service montés par le système Kubernetes, et non le secret que vous avez créé. L'accès à ce secret n'indique pas que le pod peut accéder à d'autres secrets avec ce jeton.
@@ -82,18 +82,18 @@ metadata:
   name: secret-access-sa
 ```
 
-Puis créer les : 
+Puis créer les :
 
 ```
-kubectl create -f api-reader-service-accounts.yaml 
+kubectl create -f api-reader-service-accounts.yaml
 kubectl get serviceaccounts
 ```
 
 ### Créer les Cluster Roles
 
-Un ClusterRole définit un ensemble d'autorisations utilisé pour accéder aux ressources, telles que les pods et les secrets. Les ClusterRole sont étendus au cluster. Les ClusterRole définis ici sont attachés aux comptes de service via une liaison de rôle dans les étapes suivantes. 
+Un ClusterRole définit un ensemble d'autorisations utilisé pour accéder aux ressources, telles que les pods et les secrets. Les ClusterRole sont étendus au cluster. Les ClusterRole définis ici sont attachés aux comptes de service via une liaison de rôle dans les étapes suivantes.
 
-L'utilisation d'un RoleBinding au lieu d'un ClusterRoleBinding étend les autorisations à un namespace. 
+L'utilisation d'un RoleBinding au lieu d'un ClusterRoleBinding étend les autorisations à un namespace.
 
 Créer le fichier **api-reader-cluster-roles.yaml**
 
@@ -121,7 +121,7 @@ rules:
   verbs: ["get", "watch", "list"]
 ```  
 
-Puis créer les ressources 
+Puis créer les ressources
 
 ```
 kubectl create -f api-reader-cluster-roles.yaml
@@ -166,16 +166,16 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 ```
 
-Créer les ressources 
+Créer les ressources
 
 ```
-kubectl create -f api-reader-role-bindings.yaml 
+kubectl create -f api-reader-role-bindings.yaml
 kubectl get rolebindings
 ```
 
 ### Créer l'image Docker
 
-Le fichier **Dockerfile** 
+Le fichier **Dockerfile**
 
 ```
 FROM ubuntu
@@ -288,7 +288,7 @@ kubectl logs secret-access-pod
 Vous pouvez désormais voir le résultat autorisé à l'API K8S.
 Vous pouvez même vous cible exactement le secret qui nous intéresse.
 
-Faites un copier/coller de la ligne montrée dans le *echo*. Celle-ci doit ressembler à 
+Faites un copier/coller de la ligne montrée dans le *echo*. Celle-ci doit ressembler à
 ```
 curl -sSk -H "Authorization: Bearer xxxxxxx" https://10.233.0.1:443/api/v1/namespaces/dev/secrets/
 ```
@@ -317,10 +317,9 @@ Parce que le service account est lié au namespace DEV, il n'est pas autorisé �
 En fonction des installations, le système d'audit peut ne pas être disponible.
 L'API **audit.k8s.io** est disponible depuis la 1.12 en v1beta et seulement en 1.13 en v1.
 
-Les informations se trouvent ici par exemple : 
+Les informations se trouvent ici par exemple :
 ```
 /var/log/kubernetes/audit/kube-apiserver-audit.log
 ```
 
 Pour savoir où se trouve un tel fichier, il faut se connecter dans le pod **kube-apiserver** puis faire un **ps | grep kube** pour avoir le détail du processus et ses options.
-

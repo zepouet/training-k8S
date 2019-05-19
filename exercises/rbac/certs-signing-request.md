@@ -45,7 +45,7 @@ openssl req -new -key treeptik.student-key.pem -out treeptik.student.csr \
 
 ### Créer la demande de signature du certificat
 
-Créer un fichier certsingnrequest.yaml 
+Créer un fichier certsingnrequest.yaml
 ```
 apiVersion: certificates.k8s.io/v1beta1
 kind: CertificateSigningRequest
@@ -61,7 +61,7 @@ spec:
   - client auth
 ```
 
-Remplacer la valeur du champs request par le résultat de la commande : 
+Remplacer la valeur du champs request par le résultat de la commande :
 ```
 cat treeptik.student.csr | base64 | tr -d '\n'
 ```
@@ -117,7 +117,7 @@ subjects:
   name: treeptik.student
   apiGroup: ""
 roleRef:
-  kind: Role 
+  kind: Role
   name: pod-reader
   apiGroup: ""
 ```
@@ -140,7 +140,7 @@ kubectl get csr user-request-treeptik-student -o jsonpath='{.status.certificate}
 ```
 
 
-### Créer l'utilisateur 
+### Créer l'utilisateur
 
 ```
 kubectl config set-credentials treeptik.student --embed-certs=true --client-certificate=treeptik.student.pem --client-key=treeptik.student-key.pem
@@ -160,7 +160,7 @@ kubectl config set-context treeptik-context \
                 --user=treeptik.student --namespace=treeptik-namespace
 ```
 
-### Tester le nouvel utilisateur 
+### Tester le nouvel utilisateur
 
 Changer de contexte :
 ```
@@ -225,3 +225,9 @@ clusters:
 ...
 ```
 
+## Retour en mode ADMINISTRATEUR pour le TP suivant
+
+```
+kubectl config use-context kubernetes-admin@cluster.local
+kubectl delete ns treeptik-namespace
+```
