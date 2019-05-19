@@ -30,7 +30,7 @@ Edit the file *metrics-server-deployment.yaml* and add the command
 ```
 containers:
 - name: metrics-server
-  image: k8s.gcr.io/metrics-server-amd64:v0.3.1
+  image: k8s.gcr.io/metrics-server-amd64:v0.3.3
   imagePullPolicy: Always
   volumeMounts:
   - name: tmp-dir
@@ -61,7 +61,7 @@ mkdir ~/autoscaling
 
 ## Exercises guided
 
-### Exercise 
+### Exercise
 
 Run a sample app based on a webserver to expose it on port 80.
 
