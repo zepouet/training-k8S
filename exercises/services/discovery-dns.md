@@ -60,7 +60,7 @@ nginxsvc     NodePort    10.43.245.59   <none>        80:30001/TCP   9s
 
 ## Inspecter le container
 
-Créer un fichier **shell-demo.yml**
+Créer un fichier **shell-demo.yaml**
 
 ```
 apiVersion: v1
