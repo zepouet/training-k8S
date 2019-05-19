@@ -4,6 +4,50 @@
 
 Create the directory **data/autoscaling** in your home folder to manage the YAML file needed in this module.
 
+Verify the **metric-server** is running or installed...
+
+```
+kubectl get apiservices |egrep metrics
+
+v1beta1.metrics.k8s.io                  kube-system/metrics-server   True        26m
+```
+
+Too, you could to
+```
+kubectl top nodes
+kubectl top pods
+```
+
+If not, try to do it
+
+```
+git clone https://github.com/kubernetes-incubator/metrics-server.git
+cd metrics-server
+```
+
+Edit the file *metrics-server-deployment.yaml* and add the command
+
+```
+containers:
+- name: metrics-server
+  image: k8s.gcr.io/metrics-server-amd64:v0.3.1
+  imagePullPolicy: Always
+  volumeMounts:
+  - name: tmp-dir
+    mountPath: /tmp
+
+  command:
+      - /metrics-server
+      - --kubelet-insecure-tls
+      - --kubelet-preferred-address-types=InternalIP
+```
+
+Then
+
+```
+kubectl apply -f deploy/1.8+/
+```
+
 ## External documentation
 
 Those documentations can help you to go further in this topic :
@@ -12,7 +56,7 @@ Those documentations can help you to go further in this topic :
 * Kubernetes official documentation of [autoscale API](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale)
 
 ```
-mkdir ~/data/autoscaling
+mkdir ~/autoscaling
 ```
 
 ## Exercises guided
