@@ -196,8 +196,7 @@ Set the default limits of container resources has below :
 
 Those documentations can help you to go further in this topic :
 
-* Kubernetes official documentation on resource quotas
-https://kubernetes.io/docs/concepts/policy/resource-quotas/
+* Kubernetes official documentation on (resource quotas)[https://kubernetes.io/docs/concepts/policy/resource-quotas/]
 * Kubernetes official documentation on how to manage resource quotas in a namespace
 https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/quota-memory-cpu-namespace/
 * Kubernetes official documentation on the configuration of CPU limits
