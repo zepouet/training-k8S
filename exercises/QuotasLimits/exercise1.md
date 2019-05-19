@@ -7,7 +7,7 @@ Limits restrict the resource usage of a pod as follows:
 * If its memory usage exceeds the memory limit, this pod is out of memory (OOM) killed.
 * If its CPU usage exceeds the CPU limit, this pod is not killed, but its CPU usage is restricted to the limit.
 
-### Resource Quota
+### Resource quota
 
 Kubernetes provides the ResourceQuota object to set constraints on the number of Kubernetes objects by type and the amount of resources (CPU and memory) in a namespace.
 * One or more ResourceQuota objects can be created in a namespace.
@@ -22,7 +22,7 @@ Create the directory data/quotas in your home folder to manage the YAML file nee
 mkdir ~/data/quotas
 ```
 
-## Resource Quota
+## Resource quota
 
 Create the file **resourcequota.yaml**
 
@@ -47,7 +47,7 @@ Create the object based on the previous yaml file definition.
 kubectl create -f ~/data/quotas/resourcequota.yaml
 ```
 
-## Limit Range
+## Limit range
 
 The LimitRange object is used to set the default resource requests and limits as well as minimum and maximum constraints for each pod in a namespace.
 
@@ -83,11 +83,11 @@ Create the object based on the previous yaml file definition.
 kubectl create -f ~/data/limits/limitrange.yaml
 ```
 
-## GET COMMAND
+## GET Command
 
 The **get command** list the object asked. It could be a single object or a list of multiple objects comma separated. This command is useful to get the status of each object. The output can be formatted to only display some information based on some json search or external tools like tr, sort, uniq.
 
-### resource quota
+### Resource quota
 
 The default output display some useful information about each services :
 * Name : the name of the newly created object
@@ -97,7 +97,7 @@ The default output display some useful information about each services :
 kubectl get resourcequota
 ```
 
-### Limit Range
+### Limit range
 
 The default output display some useful information about each services :
 * Name : the name of the newly created object
@@ -117,7 +117,7 @@ This command is really useful to introspect and debug an object deployed in a cl
 
 Describe one of the existing resource quota in the default namespace.
 
-### resource  quota
+### Resource  quota
 
 Describe one of the existing resource quota in the default namespace.
 
@@ -125,7 +125,7 @@ Describe one of the existing resource quota in the default namespace.
 kubectl describe resourcequota myfirstresourcequota
 ```
 
-### Limit Range
+### Limit range
 
 Describe one of the existing limit range in the default namespace.
 
@@ -139,7 +139,7 @@ Kubernetes come with a lot of documentation about his objects and the available 
 
 The *explain command* allows to directly ask the API resource via the command line tools to display information about each Kubernetes objects and their architecture.
 
-### resource quota
+### Resource quota
 
 Get the documentation of a specific field of a resource quota.
 
@@ -147,7 +147,7 @@ Get the documentation of a specific field of a resource quota.
 kubectl explain resourcequota
 ```
 
-### limit Range
+### Limit range
 
 Get the documentation of a specific field of a limit range.
 
@@ -155,7 +155,7 @@ Get the documentation of a specific field of a limit range.
 kubectl explain limitrange
 ```
 
-## Delete COMMAND
+## Delete Command
 
 The **delete** command delete resources by filenames, stdin, resources and names, or by resources and label selector.
 
@@ -197,7 +197,7 @@ Create a new file **quotas.yml** limiting the amount of available resources in t
 * The limit of CPU unit available is 7
 * The limit of memory available is 6Gi
 
-## Limit Range
+## Limit range
 
 Create a new file **limitrange.yml**
 Set the default limits of container resources has below :
