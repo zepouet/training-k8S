@@ -61,7 +61,7 @@ mkdir ~/autoscaling
 
 ## Exercises guided
 
-### Exercise 1
+### Exercise 
 
 Run a sample app based on a webserver to expose it on port 80.
 
@@ -78,37 +78,6 @@ Create an Horizontal Pod Autoscaler to automatically scale the Deployment if the
 
 kubectl autoscale deployment php-apache --cpu-percent=50 --min=3 --max=10
 ```
-
-### Exercise 2
-
-Run a sample nginx application exposing port 8080
-
-```
-kubectl run nginx --image=nginx --requests=memory=500m --limits=memory=1G --expose --port=8080
-```
-
-Create an Horizontal Pod Autoscaler to automatically scale the Deployment if the memory is above 50%.
-
-```
-apiVersion: autoscaling/v2beta2
-kind: HorizontalPodAutoscaler
-metadata:
-  name: nginx
-spec:
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: nginx
-  minReplicas: 1
-  maxReplicas: 5
-  metrics:
-  - type: Resource
-    resource:
-      name: memory
-      target:
-        type: Utilization
-        averageUtilization: 80
-```        
 
 ## Get Command
 
