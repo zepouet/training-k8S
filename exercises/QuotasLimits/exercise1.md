@@ -171,11 +171,23 @@ kubectl delete resourcequota myfirstresourcequota
 kubectl delete limitrange myfirstlimitrange
 ```
 
+# External documentation
+
+Those documentations can help you to go further in this topic :
+
+* Kubernetes official documentation on [resource quotas](https://kubernetes.io/docs/concepts/policy/resource-quotas/)
+* Kubernetes official documentation on [how to manage resource quotas in a namespace](https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/quota-memory-cpu-namespace/)
+* Kubernetes official documentation on the [configuration of CPU limits](https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/cpu-default-namespace/)
+* Kubernetes official documentation on the [configuation of memory limits](https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/memory-default-namespace/)
+
+
 # Exercise
 
 The purpose of this section is to manage each steps of the lifecycle of an application to better understand each concepts of the Kubernetes course.
 
 The main objective in this module is to understand how to dynamically and automatically manage the limits of CPU and memory of Pods and manage resource quotas of the namespace.
+
+**Solution** is given but try to do it without reading it.
 
 ## Resource quota
 
@@ -191,12 +203,3 @@ Create a new file **limitrange.yml**
 Set the default limits of container resources has below :
 * By default, a container can request 256Mi of memory and 0.5 of CPU unit
 * The default limits is 512Mi of memory and 1 CPU unit
-
-# External documentation
-
-Those documentations can help you to go further in this topic :
-
-* Kubernetes official documentation on [resource quotas](https://kubernetes.io/docs/concepts/policy/resource-quotas/)
-* Kubernetes official documentation on [how to manage resource quotas in a namespace](https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/quota-memory-cpu-namespace/)
-* Kubernetes official documentation on the [configuration of CPU limits](https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/cpu-default-namespace/)
-* Kubernetes official documentation on the [configuation of memory limits](https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/memory-default-namespace/)
