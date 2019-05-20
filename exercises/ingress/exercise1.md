@@ -157,8 +157,8 @@ spec:
 ```
 
 Once the Pods are up and running, you should be able to connect to this two urls :
-* http://training.training.io:<NODEPORT>/path1
-* http://training.training.io:<NODEPORT>/path2
+* http://training.treeptik.io : <NODEPORT> /path1
+* http://training.treeptik.io : <NODEPORT> /path2
 
 ## Get command
 
