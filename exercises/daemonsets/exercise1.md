@@ -5,7 +5,7 @@
 ### List your nodes
 
 ```
-kubectl get nodes
+kubectl get nodes --show-labels
 ```
 
 ### Add label to your nodes
@@ -67,5 +67,7 @@ It should be also another node with **ssd=true** label
 ### Clean up
 
 ```
+kubectl label node <worker1> ssd-
+kubectl label node <worker2> ssd-
 kubectl delete ds nginx-fast-storage
 ```
