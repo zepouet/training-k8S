@@ -12,4 +12,34 @@
 --------
 
 
-<img src="Slides/Img/Architecture/daemonset.yaml.png" />
+<img src="Slides/Img/Architecture/daemonset.yaml.png" width="60%" />
+
+
+--------
+
+
+<img src="https://cdn-images-1.medium.com/max/1600/1*QPFPOV-dDiWjL9H_O4_GUw.png" />
+
+
+--------
+
+
+```
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  name: logging
+spec:
+  template:
+    metadata:
+      labels:
+        app: logging-app
+    spec:
+      nodeSelector:
+        app: logging-node
+      containers:
+        - name: webserver
+          image: nginx
+          ports:
+          - containerPort: 80
+  ```        
