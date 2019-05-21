@@ -66,6 +66,12 @@ Exposing services other than HTTP and HTTPS
 --------
 
 
+<img src="Slides/Img/Ingress/ingress.png" width="60%" />
+
+
+--------
+
+
 ### Ingress Controller
 #### definition
 <br/>
